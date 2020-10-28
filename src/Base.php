@@ -35,6 +35,8 @@ abstract class Base
      * @var array
      */
     protected $middleware = [];
+	
+	protected $getJson = false;
 
     /**
      * 构造方法
@@ -45,6 +47,7 @@ abstract class Base
     {
         $this->app     = $app;
         $this->request = $this->app->request;
+		$this->getJson = $this->app->request->header('GTYPE')=='json'?true:false;
 
         // 控制器初始化
         $this->initialize();

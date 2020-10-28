@@ -15,12 +15,14 @@ use think\facade\Db;
 use think\facade\Config;
 use think\facade\Session;
 
+
 class AdminBase extends Base
 {
     protected $Admin;
     protected $argss;
     protected function initialize()
     {
+    	parent::initialize();
         $this->VerifyAuth();
     }
     public function getSqlField()
@@ -35,7 +37,7 @@ class AdminBase extends Base
 	protected function VerifyAuth()
 	{
 		if(!Session::has('Admin')){
-			Error('未登录，请重新登录',-10001,['url'=>'/Index/Login']);
+			Error('未登录，请重新登录',-1000,['url'=>'/Index/Login']);
 		}
 		$Admin = Session::get('Admin');
 		if($Admin['super']==0){
@@ -57,9 +59,47 @@ class AdminBase extends Base
 	{
 		
 	}
+	protected function FileUpload($type,$id,$fix='')
+	{
+		$aa =   Vendor\UpLoadFile::Upload('public',['type'=>'aaa','id'=>1]);
+		dd($aa);
+		$files = $this->request->file();
+		$fileNames = array_keys($files);
+		$path = '/'.$type.'/'.$id.'/';
+		$save = [];
+		foreach ($files as $key => $value) {
+			$name = trim(trim($key),"_");
+			if(is_array($value)){
+				$saveF = [];
+				foreach ($value as $keys => $file) {
+					$saveFile = \think\facade\Filesystem::putFile($path.$name, $file,function($e){
+						return md5_file($e);
+					});
+					$saveF[$keys] = $fix.'/'.$saveFile;
+				}
+				$save[$name] = $saveF;
+			}else{
+				$saveFile = \think\facade\Filesystem::putFile($path.$name, $value,function($e){
+					return md5_file($e);
+				});
+				$save[$name] = $fix.'/'.$saveFile;
+			}
+			
+		}
+		return array_filter($save);
+	}
+	
+	
     public function UeditControl()
     {
     	return Vendor\Ueditor::Method($this->request->param());
+    }
+	public function Super()
+    {
+    	if(session('Admin.super') != 1){
+			Error('无权限');
+		}
+    	return Vendor\Super::Method();
     }
     public function __call($method, $args)
     {

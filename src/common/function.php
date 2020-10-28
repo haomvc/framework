@@ -5,7 +5,7 @@ use think\Response;
 use think\response\Json;
 
 if (!function_exists('Error')) {
-    function Error($msg='参数错误', $code = -1, $data = [])
+    function Error($msg='参数错误', $code = 1, $data = [])
     {
         $arr = ['status'=>'error','code'=>$code,'msg'=>$msg,'data'=>$data];
         echo json_encode($arr, JSON_UNESCAPED_UNICODE);
@@ -116,3 +116,25 @@ if (!function_exists('PSW_MD6')) {
         return $pwd;
     }
 }
+if (!function_exists('isEmptyArray')) {
+    function isEmptyArray($array)
+    {
+    	if(is_array($array)){
+    		$result = array_filter($array);
+        	return count($result)>0;
+    	}else{
+    		return false;
+    	}
+        
+    }
+}
+if (!function_exists('get_match_all')) {
+    function get_match_all($pattern,$subject){
+ 		preg_match_all ($pattern, $subject, $pat_array);
+	 	return $pat_array[0];
+	}
+}
+function test_odd($var)
+		{
+			dump($var);
+		}
