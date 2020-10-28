@@ -14,7 +14,7 @@
             "HaoMVC\\": "src/"
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "1.0.1.x-dev",
     "prefer-stable": true,
     "config": {
         "sort-packages": true
