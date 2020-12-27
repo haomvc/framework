@@ -8,15 +8,11 @@
     "license": "Apache-2.0",
     "authors": [],
     "require": {},
+    "minimum-stability": "dev",
     "autoload": {
         "files": ["src/function.php"],
         "psr-4": {
             "HaoMVC\\": "src/"
         }
-    },
-    "minimum-stability": "alpha",
-    "prefer-stable": true,
-    "config": {
-        "sort-packages": true
     }
 }
