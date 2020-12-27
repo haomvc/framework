@@ -9,12 +9,12 @@
     "authors": [],
     "require": {},
     "autoload": {
-        "files": ["src/common/function.php"],
+        "files": ["src/function.php"],
         "psr-4": {
             "HaoMVC\\": "src/"
         }
     },
-    "minimum-stability": "1.0.1.x-dev",
+    "minimum-stability": "master",
     "prefer-stable": true,
     "config": {
         "sort-packages": true
