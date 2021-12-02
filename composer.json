@@ -1,0 +1,26 @@
+{
+	"name": "haomvc/framework",
+	"description": "HaoMVC",
+	"type": "library",
+	"require": {
+		"php": ">=7.2.5"
+	},
+	"license": "MIT",
+	"autoload": {
+		"psr-4": {
+			"HaoMVC\\": "src/"
+		},
+		"files": [
+			"src/helper.php"
+		]
+	},
+	"authors": [{
+		"name": "HaoMVC",
+		"email": "haomvc@outlook.com"
+	}],
+	"minimum-stability": "stable",
+	"prefer-stable": true,
+	"config": {
+		"sort-packages": true
+	}
+}
