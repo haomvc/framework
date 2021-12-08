@@ -14,6 +14,16 @@
 			"src/helper.php"
 		]
 	},
+	"extra": {
+        "think": {
+            "services": [
+                "HaoMVC\\HaoMVCService"
+            ],
+            "config":{
+                "HaoMVC": "src/config.php"
+            }
+        }
+    },
 	"authors": [{
 		"name": "HaoMVC",
 		"email": "haomvc@outlook.com"

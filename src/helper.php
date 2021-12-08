@@ -1,5 +1,10 @@
 <?php
 
+use think\response\Json;
+use think\Response;
+use think\facade\Config;
+use think\facade\Cache;
+
 if (!function_exists('getFirstCharters')) {
     function getFirstCharters($str)
     {
@@ -268,5 +273,21 @@ if (!function_exists('writeHtml')) {
         }else{
         	return $cacheFile." 文件生成成功！";
         }
+    }
+}
+if (!function_exists('Success')) {
+    function Success($msg='success', $data = [], $code = 20000): Json
+    {
+        header('Content-Type:application/json; charset=utf-8');
+        $jsonData = is_array($msg)?$msg:['code'=>$code,'message'=>$msg,'data'=>$data];
+        return Response::create($jsonData, 'json', 200)->header([])->options([]);
+    }
+}
+if (!function_exists('Error')) {
+    function Error($msg='error', $code = 1, $data = [])
+    {
+        header('Content-Type:application/json; charset=utf-8');
+        $jsonData = is_array($msg)?$msg:['code'=>$code,'message'=>$msg,'data'=>$data];
+        return Response::create($jsonData, 'json', 200)->send();
     }
 }
